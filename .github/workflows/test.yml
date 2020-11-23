@@ -37,11 +37,11 @@ jobs:
         shell: bash
         run: |
           MAX=${{ matrix.interaction-count }}
-          ./optic_diff.exe input-events.json | ./slow-stdin-consumer.sh < input-interactions-$MAX.jsonl
+          ./optic_diff.exe input-events.json  < input-interactions-$MAX.jsonl | ./slow-stdin-consumer.sh
 
       - name: "run diff"
         shell: bash
         run: |
           MAX=${{ matrix.interaction-count }}
-          ./optic_diff.exe input-events.json | ./slow-stdin-consumer.sh > output.log < input-interactions-$MAX.jsonl
+          ./optic_diff.exe input-events.json  > output.log < input-interactions-$MAX.jsonl | ./slow-stdin-consumer.sh
           cat output.log
