@@ -32,4 +32,4 @@ jobs:
         shell: bash
         run: |
           MAX=${{ matrix.interaction-count }}
-          ./optic-diff.exe input-events.json < input-interactions-$MAX.jsonl
+          ./optic_diff.exe input-events.json < input-interactions-$MAX.jsonl
