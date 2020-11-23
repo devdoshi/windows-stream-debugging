@@ -32,7 +32,7 @@ jobs:
         shell: bash
         run: |
           MAX=${{ matrix.interaction-count }}
-          cat input-interactions-$MAX.jsonl | ./optic_diff.exe input-events.json
+          cat input-interactions-$MAX.jsonl | grep uuid | ./optic_diff.exe input-events.json
       - name: "run diff"
         shell: bash
         run: |
