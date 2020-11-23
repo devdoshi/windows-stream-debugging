@@ -17,6 +17,7 @@ jobs:
         shell: bash
         run: |
           MAX=${{ matrix.interaction-count }}
+          touch input-$MAX.jsonl
           for i in $(seq 1 $MAX);
           do
             cat input-interactions.jsonl >> input-interactions-$MAX.jsonl
