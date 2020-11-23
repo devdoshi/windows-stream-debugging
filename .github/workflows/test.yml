@@ -1,0 +1,30 @@
+name: Test Regression Scenarios
+
+on: push
+
+jobs:
+
+  local-cli-regression:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ windows-latest ]
+        interaction-count: [0, 1, 100, 1000, 10000]
+        #rust-diff-engine: ["true"]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: "copy input data"
+        shell: bash
+        run: |
+          MAX=${{ matrix.interaction-count }}
+          for i in $(seq 1 $MAX);
+          do
+            cat input-interactions.jsonl >> input-interactions-$MAX.jsonl
+            echo >> input-interactions-$MAX.jsonl
+          done
+
+      - name: "run diff"
+        shell: bash
+        run: |
+          MAX=${{ matrix.interaction-count }}
+          optic-diff.exe input-events.json < input-interactions-$MAX.jsonl
