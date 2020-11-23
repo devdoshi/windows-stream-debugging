@@ -17,15 +17,17 @@ jobs:
         shell: bash
         run: |
           MAX=${{ matrix.interaction-count }}
-          touch input-$MAX.jsonl
+          touch input-interactions-$MAX.jsonl
           for i in $(seq 1 $MAX);
           do
             cat input-interactions.jsonl >> input-interactions-$MAX.jsonl
             echo >> input-interactions-$MAX.jsonl
           done
-
+      - name: "ls"
+        shell: bash
+        run: ls -lah
       - name: "run diff"
         shell: bash
         run: |
           MAX=${{ matrix.interaction-count }}
-          optic-diff.exe input-events.json < input-interactions-$MAX.jsonl
+          ./optic-diff.exe input-events.json < input-interactions-$MAX.jsonl
