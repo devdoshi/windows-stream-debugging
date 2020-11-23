@@ -25,9 +25,15 @@ jobs:
             cat input-interactions.jsonl >> input-interactions-$MAX.jsonl
             echo >> input-interactions-$MAX.jsonl
           done
+          cat input-interactions-$MAX.jsonl
       - name: "ls"
         shell: bash
         run: ls -lah
+      - name: "run diff"
+        shell: bash
+        run: |
+          MAX=${{ matrix.interaction-count }}
+          cat input-interactions-$MAX.jsonl | ./optic_diff.exe input-events.json
       - name: "run diff"
         shell: bash
         run: |
