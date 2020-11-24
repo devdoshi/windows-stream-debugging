@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/devdoshi/windows-stream-debugging#readme",
   "dependencies": {
-    "@useoptic/cli-scripts": "^8.6.0-beta.2",
+    "@useoptic/cli-scripts": "^8.6.0-beta.18",
     "@useoptic/diff-engine": "^8.6.0-beta.18",
     "execa": "^4.1.0",
     "split": "^1.0.1"
