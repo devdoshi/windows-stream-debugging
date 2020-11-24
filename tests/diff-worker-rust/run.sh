@@ -14,8 +14,10 @@ echo $DIFF_CONFIG
 
 echo "----> Running diff worker"
 
+# node $TEST_PATH/../../node_modules/\@useoptic/cli-scripts/build/emit-diff-projections-rust.js $DIFF_CONFIG
 
-node $TEST_PATH/../../node_modules/\@useoptic/cli-scripts/build/emit-diff-projections-rust.js $DIFF_CONFIG
+node $TEST_PATH/spawn.js $DIFF_CONFIG
+
 WORKER_EXIT=$?
 
 DIFFS_COUNT=$(wc -l $TEST_PATH/capture/diffs/test-diff/diffs.jsonl)
