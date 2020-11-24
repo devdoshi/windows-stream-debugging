@@ -35,19 +35,21 @@ async function main(interactionsPath, eventsPath) {
   }
 
   // prepare output
-  const outputDir = path.join(__dirname, "output");
-  if (fs.existsSync(outputDir)) {
-    rimraf.sync(outputDir);
+  const diffId = "test-diff";
+  const outputBaseDir = path.join(captureBaseDirectory, captureId, "diffs");
+  const outputDir = path.join(outputBaseDir, diffId);
+  if (fs.existsSync(outputBaseDir)) {
+    rimraf.sync(outputBaseDir);
   }
+  fs.mkdirpSync(path.join(outputDir));
   fs.copySync(path.join(__dirname, "output-base"), outputDir);
-
-  const diffId = ("" + Date.now()).substr(5);
+  fs.copyFileSync(eventsPath, path.join(outputDir, "events.json"));
 
   const diffConfig = {
     captureId,
     captureBaseDirectory,
     diffId,
-    specFilePath: eventsPath,
+    specFilePath: path.join(outputDir, "events.json"),
     ignoreRequestsFilePath: path.join(outputDir, "ignoreRequests.json"),
     additionalCommandsFilePath: path.join(outputDir, "additionalCommands.json"),
     filtersFilePath: path.join(outputDir, "filters.json"),
